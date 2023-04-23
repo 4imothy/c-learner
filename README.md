@@ -25,11 +25,10 @@ $\hat y_i = \sigma(w_0 + w \cdot x)$
 
 **Gradient:**
 
-$\frac{\delta E}{\delta W} = \frac{\delta E}{\delta z} \cdot \frac{\delta z}{\delta w}$
+$\frac{\delta E}{\delta w} = \frac{\delta E}{\delta z} \cdot \frac{\delta z}{\delta w}$
 
 
-$\frac{\delta E}{\delta z} = \frac{\delta}{\delta z}(\frac{1}{N}
-\Sigma_{i=1}^N(y_i - \hat y_i)^2)$
+$\frac{\delta E}{\delta z} = \frac{\delta}{\delta z}(\frac{1}{N}\Sigma_{i=1}^N(y_i - \hat y_i)^2)$
 
 **Using Chain Rule and Derivative of Sigmoid Function:**
 
