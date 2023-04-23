@@ -1,8 +1,10 @@
 ### A Neural Net Written in [C](https://en.wikipedia.org/wiki/C_(programming_language))
 
-One-Layer Neural Net with mean squared error as the objective function and sigmoid activation function.
+One-Layer Neural Net with mean squared error as the objective function and $\sigma$(sigmoid) activation function.
 
 $\text{MSE} = \Sigma_{i=1}^N(y_i-\hat y)^2$$
+
+$\sigma(x) = \frac{1}{1 +e^{-x}}$
 
 Use gradient descent to update the weights. The derivation is as follows:
 
