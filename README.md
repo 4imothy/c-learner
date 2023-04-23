@@ -2,7 +2,7 @@
 
 One-Layer Neural Net with mean squared error as the objective function and sigmoid activation function.
 
-$\text{MSE} = \sigma_{i=1}^N(y_i-\hat y)^2$$
+$\text{MSE} = \Sigma_{i=1}^N(y_i-\hat y)^2$$
 
 Use gradient descent to update the weights. The derivation is as follows:
 
