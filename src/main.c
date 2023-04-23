@@ -11,8 +11,6 @@ int main() {
     // Sepal Length, Sepal Width, Petal Length, Petal Width, Species
     what();
 
-    int p = 0;
-
     FILE *myFile = NULL;
 
     myFile = fopen("iris.data", "r");
@@ -28,12 +26,11 @@ int main() {
     size_t bufsize = 0;
 
     while (getline(&buffer, &bufsize, myFile) != -1) {
-      char *token = strtok(buffer, ",");
-      while (token) {
-          printf("%s ", token);
-          token = strtok(NULL, ",");
-      }
-      printf("\n");
+    char *token = strtok(buffer, ",");
+    while (token) {
+            printf("%s", token);
+            token = strtok(NULL, ",");
+        }
     }
     free(buffer);
     return 0;
