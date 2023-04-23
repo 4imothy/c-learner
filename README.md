@@ -1,0 +1,51 @@
+### A Neural Net Written in [C](https://en.wikipedia.org/wiki/C_(programming_language))
+
+One-Layer Neural Net with mean squared error as the objective function.
+
+$\text{MSE} = \sum_{i=1}^N(y_i-\hat y)^2$$
+
+Use gradient descent to update the weights. The derivation is as follows:
+
+$y_i:$ Actual
+
+$\hat y_i:$ Predicted
+
+$x:$ Input
+
+$w:$ Weights
+
+
+\textbf{Objective Function \textit{MSE}}
+
+$E = \frac{1}{N}\Sigma^N_{i=1}(y_i - \hat y_i)^2$
+ 
+\textbf{Prediction Function:}
+
+$\hat y_i = \sigma(w_0 + w \cdot x)$
+
+\textbf{Gradient:}  
+
+$\frac{\delta E}{\delta W} = \frac{\delta E}{\delta z} \cdot \frac{\delta z}{\delta w}$
+
+
+$\frac{\delta E}{\delta z} = \frac{\delta}{\delta z}(\frac{1}{N}
+\Sigma_{i=1}^N(y_i - \hat y_i)^2)$
+
+\textbf{Using Chain Rule and Derivative of Sigmoid Function:}
+
+$=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))$
+
+\textbf{Derivative of Weights}
+
+$\frac{\delta z}{\delta w} = \frac{\delta}{\delta w} (w_0 + w\cdot x) = x$
+
+\textbf{Multilpy Together to get $\frac{\delta E}{\delta w}$:}
+
+\textbf{Vector:}
+
+$\frac{\delta E}{\delta W}=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))x$
+
+\textbf{Scalar:}
+
+$\frac{\delta E}{\delta W_j}=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))x_{i,j}$
+
