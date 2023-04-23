@@ -1,6 +1,6 @@
 ### A Neural Net Written in [C](https://en.wikipedia.org/wiki/C_(programming_language))
 
-One-Layer Neural Net with mean squared error as the objective function.
+One-Layer Neural Net with mean squared error as the objective function and sigmoid activation function.
 
 $\text{MSE} = \sum_{i=1}^N(y_i-\hat y)^2$$
 
@@ -15,7 +15,7 @@ $x:$ Input
 $w:$ Weights
 
 
-\textbf{Objective Function \textit{MSE}}
+**Objective Function *MSE***
 
 $E = \frac{1}{N}\Sigma^N_{i=1}(y_i - \hat y_i)^2$
  
@@ -23,7 +23,7 @@ $E = \frac{1}{N}\Sigma^N_{i=1}(y_i - \hat y_i)^2$
 
 $\hat y_i = \sigma(w_0 + w \cdot x)$
 
-\textbf{Gradient:}  
+**Gradient:**
 
 $\frac{\delta E}{\delta W} = \frac{\delta E}{\delta z} \cdot \frac{\delta z}{\delta w}$
 
@@ -31,21 +31,21 @@ $\frac{\delta E}{\delta W} = \frac{\delta E}{\delta z} \cdot \frac{\delta z}{\de
 $\frac{\delta E}{\delta z} = \frac{\delta}{\delta z}(\frac{1}{N}
 \Sigma_{i=1}^N(y_i - \hat y_i)^2)$
 
-\textbf{Using Chain Rule and Derivative of Sigmoid Function:}
+**Using Chain Rule and Derivative of Sigmoid Function:**
 
 $=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))$
 
-\textbf{Derivative of Weights}
+**Derivative of Weights**
 
 $\frac{\delta z}{\delta w} = \frac{\delta}{\delta w} (w_0 + w\cdot x) = x$
 
-\textbf{Multilpy Together to get $\frac{\delta E}{\delta w}$:}
+**Multilpy Together to get $\frac{\delta E}{\delta w}$:**
 
-\textbf{Vector:}
+**Vector:**
 
 $\frac{\delta E}{\delta W}=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))x$
 
-\textbf{Scalar:}
+**Scalar:**
 
 $\frac{\delta E}{\delta W_j}=\frac{-2}{N} \Sigma_{i=1}^N(y_i - \sigma(w_0 + w \cdot x))\sigma(w_0 + w \cdot x)(1 -\sigma(w_0 + w\cdot x))x_{i,j}$
 
