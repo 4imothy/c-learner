@@ -8,8 +8,8 @@ HEADER_FILES := $(shell find $(SRC_DIR) -name '*.h')
 
 all: clearner
 
-%.o: %.c %.h
-	$(CC) $(CLFAGS) -c $^
+# %.o: %.c %.h
+# 	$(CC) $(CLFAGS) -c $^
 
 clearner: $(SRC_FILES) $(HEADER_FILES)
 	$(CC) $(CFLAGS) -o $@ $(SRC_FILES)
