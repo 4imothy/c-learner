@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include "objective_functions.h"
+#include <stdio.h>
 
-void what() {
-  printf("what\n");
-}
+void mse(float predictions[], float targets[]) { printf("getting mse\n"); }
