@@ -1,6 +1,6 @@
 #ifndef OBJECTIVE_FUNCTIONS_H
 #define OBJECTIVE_FUNCTIONS_H
 
-void what();
+float mse(float predictions[], float targets[]);
 
 #endif
