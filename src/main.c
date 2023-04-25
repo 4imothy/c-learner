@@ -68,10 +68,56 @@ int main()
     free(buffer);
     free(token);
 
+    int num_classes = 1;
     int tar_idx = num_cols - 1;
-    for (int i = 0; i < num_lines; i++){
-        printf("%s", lines[i][tar_idx]);
+    // add the first one
+    char **classes = malloc(num_classes * sizeof(char *));
+    classes[num_classes - 1] = lines[0][tar_idx];
+    for (int i = 1; i < num_lines; i++){
+        int not_contained = 0;
+        for (int j = 0; j < num_classes; j++) {
+            if (strcmp(lines[i][tar_idx], classes[j]) != 0) {
+                not_contained++;
+            }
+        }
+        if (not_contained == num_classes){
+            num_classes++;
+            classes = realloc(classes, num_classes * sizeof(char *));
+            classes[num_classes - 1] = malloc(sizeof(lines[i][tar_idx]));
+            strcpy(classes[num_classes - 1], lines[i][tar_idx]);
+        }
     }
-    
+
+    for (int i = 0; i < num_lines; i++) {
+        for (int j = 0; j < num_classes; j++) {
+            if (strcmp(lines[i][tar_idx], classes[j]) == 0) {
+                sprintf(lines[i][tar_idx], "%d\n", j);
+                break;
+            }
+        }
+    } 
+
+    float ***data = malloc(num_lines * sizeof(float **));
+    for (int i = 0; i < num_lines; i++) {
+        data[i] = malloc(num_cols * sizeof(float *));
+        for (int j = 0; j < num_cols; j++) {
+            data[i][j] = malloc(sizeof(float));
+            *data[i][j] = strtof(lines[i][j], NULL);
+        }
+    }
+
+    // free up lines
+    for (int i = 0; i < num_lines; i++) {
+        for (int j = 0; j < num_cols; j++) {
+            free(lines[i][j]);
+        }
+    }
+    free(lines);
+    for (int i = 0; i < num_lines; i++) {
+        // for (int j = 0; j < num_cols; j++) {
+            printf("%f\n", *data[i][4]);
+        // }
+    }
+
     return 0;
 }
