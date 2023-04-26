@@ -12,6 +12,7 @@
 #include <time.h>
 
 #define LEARNING_RATE 0.1
+#define CONVERGENCE_BOUND 0.02
 
 void update(double ***data, double *weights, double *predictions, int num_data,
             int input_dim)
@@ -93,7 +94,7 @@ int main()
         update(data, weights, predictions, num_data, input_dim);
 
         printf("Error: %f\n", mse);
-        if (mse < 0.04) {
+        if (mse < CONVERGENCE_BOUND) {
             conv = true;
         }
     }
