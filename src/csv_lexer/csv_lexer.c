@@ -56,7 +56,7 @@ char ***get_lines(FILE *file, int *nl, int *num_cols)
 }
 
 char **class_to_numeric(char ***lines, int *num_classes, int tar_idx,
-                      int num_lines)
+                        int num_lines)
 {
     char **classes = NULL;
     int c = 0;
@@ -89,7 +89,8 @@ char **class_to_numeric(char ***lines, int *num_classes, int tar_idx,
     return classes;
 }
 
-double ***lex_csv(FILE *file, char ***classes, int *num_data, int *num_cols, int *num_classes)
+double ***lex_csv(FILE *file, char ***classes, int *num_data, int *num_cols,
+                  int *num_classes)
 {
     int num_lines = 0;
     char ***lines = get_lines(file, &num_lines, num_cols);
