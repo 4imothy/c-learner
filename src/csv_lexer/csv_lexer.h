@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float ***lex_csv(FILE *myFile, int *num_data, int *num_cols);
+double ***lex_csv(FILE *file, char*** classes, int *num_data, int *num_cols, int *num_classes);
 
 #endif
