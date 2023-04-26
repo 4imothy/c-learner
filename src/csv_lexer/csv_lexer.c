@@ -55,7 +55,7 @@ char ***get_lines(FILE *file, int *nl, int *num_cols)
     return lines;
 }
 
-void class_to_numeric(char ***lines, int *num_classes, int tar_idx,
+char **class_to_numeric(char ***lines, int *num_classes, int tar_idx,
                       int num_lines)
 {
     char **classes = NULL;
@@ -69,9 +69,11 @@ void class_to_numeric(char ***lines, int *num_classes, int tar_idx,
         }
         if (not_contained == c) {
             c++;
-            classes = realloc(classes, c * sizeof(char *));
-            classes[c - 1] = malloc(sizeof(lines[i][tar_idx]));
-            strcpy(classes[c - 1], lines[i][tar_idx]);
+            char *class = lines[i][tar_idx];
+            classes = realloc(classes, c * sizeof(class));
+            // add the null character to the end
+            classes[c - 1] = malloc(strlen(class) + 1);
+            strcpy(classes[c - 1], class);
         }
     }
 
@@ -84,27 +86,23 @@ void class_to_numeric(char ***lines, int *num_classes, int tar_idx,
             }
         }
     }
-    for (int i = 0; i < *num_classes; i++) {
-        free(classes[i]);
-    }
-    free(classes);
+    return classes;
 }
 
-float ***lex_csv(FILE *file, int *num_data, int *num_cols)
+double ***lex_csv(FILE *file, char ***classes, int *num_data, int *num_cols, int *num_classes)
 {
     int num_lines = 0;
     char ***lines = get_lines(file, &num_lines, num_cols);
 
-    int num_classes = 0;
     int tar_idx = *num_cols - 1;
-    class_to_numeric(lines, &num_classes, tar_idx, num_lines);
+    *classes = class_to_numeric(lines, num_classes, tar_idx, num_lines);
 
-    float ***data = malloc(num_lines * sizeof(float **));
+    double ***data = malloc(num_lines * sizeof(double **));
     for (int i = 0; i < num_lines; i++) {
-        data[i] = malloc(*num_cols * sizeof(float *));
+        data[i] = malloc(*num_cols * sizeof(double *));
         for (int j = 0; j < *num_cols; j++) {
-            data[i][j] = malloc(sizeof(float));
-            *data[i][j] = strtof(lines[i][j], NULL);
+            data[i][j] = malloc(sizeof(double));
+            *data[i][j] = strtod(lines[i][j], NULL);
         }
     }
     *num_data = num_lines;
