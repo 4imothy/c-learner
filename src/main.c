@@ -85,6 +85,7 @@ int main()
     }
 
     bool conv = false;
+    int num_iter = 0;
     while (!conv) {
         double predictions[num_data];
         double mse = evaluate_model(weights, data, predictions, num_data,
@@ -93,11 +94,13 @@ int main()
         double delta_b;
         update(data, weights, predictions, num_data, input_dim);
 
+        num_iter++;
         printf("Error: %f\n", mse);
         if (mse < CONVERGENCE_BOUND) {
             conv = true;
         }
     }
+    printf("Converged After: %d Iterations\n", num_iter);
 
     // Free things up
     for (int i = 0; i < num_data; i++) {
