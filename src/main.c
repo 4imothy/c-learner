@@ -2,7 +2,6 @@
 // AUTHOR: Timothy Cronin
 
 #include "csv_lexer/csv_lexer.h"
-#include "obj_funcs/objective_functions.h"
 #include "utils/utils.h"
 #include <math.h>
 #include <stdbool.h>
@@ -12,16 +11,17 @@
 #include <time.h>
 
 #define LEARNING_RATE 0.1
-#define CONVERGENCE_BOUND 0.02
+#define CONVERGENCE_BOUND 0.01
 
 void update(double ***data, double *weights, double *predictions, int num_data,
             int input_dim)
 {
     double coef = (-2 * LEARNING_RATE) / num_data;
+    // = to input_dim for bias
     for (int i = 0; i <= input_dim; i++) {
         double sum = 0;
         for (int j = 0; j < num_data; j++) {
-            sum += ((*data[j][input_dim - 1] / 3) - predictions[j]) *
+            sum += ((*data[j][input_dim] / 3) - predictions[j]) *
                    (1 - predictions[j]) * predictions[j] * (*data[j][i] / 3);
         }
         weights[i] -= (sum *= coef);
@@ -99,12 +99,17 @@ int main()
         }
     }
 
+    // Free things up
     for (int i = 0; i < num_data; i++) {
         for (int j = 0; j < num_cols; j++) {
             free(data[i][j]);
         }
     }
     free(data);
+    for (int i = 0; i < num_classes; i++) {
+        free(classes[i]);
+    }
+    free(classes);
 
     return 0;
 }
